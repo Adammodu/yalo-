@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yalo AI Assistant</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: #080b14;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+header {
+  padding: 20px;
+  border-bottom: 1px solid #252d40;
+  display: flex;
+  justify-content: space-between;
+}
+.logo {
+  color: #9583ff;
+  font-size: 23px;
+  font-weight: bold;
+}
+.back {
+  color: #aaa;
+  text-decoration: none;
+}
+main {
+  max-width: 850px;
+  margin: auto;
+  padding: 30px 18px;
+}
+h2 {
+  text-align: center;
+  margin-top: 35px;
+}
+#messages {
+  min-height: 55vh;
+  padding: 20px 0;
+}
+.message {
+  padding: 15px;
+  margin: 12px 0;
+  border-radius: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+.user {
+  background: #242044;
+  margin-left: 12%;
+}
+.ai {
+  background: #141c2b;
+  margin-right: 5%;
+}
+form {
+  display: flex;
+  gap: 10px;
+  position: sticky;
+  bottom: 10px;
+  background: #080b14;
+  padding: 10px 0;
+}
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #303951;
+  border-radius: 10px;
+  background: #111827;
+  color: white;
+  outline: none;
+}
+button {
+  background: #8069ff;
+  color: white;
+  border: none;
+  padding: 0 22px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: .5;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Yalo AI.</div>
+  <a class="back" href="index.html">Home</a>
+</header>
+
+<main>
+  <h2>How can I help you today?</h2>
+
+  <div id="messages">
+    <div class="message ai">
+      Hello! Welcome to Yalo AI.
+      How can I assist you today?
+    </div>
+  </div>
+
+  <form id="chatForm">
+    <input
+      id="messageInput"
+      placeholder="Ask Yalo AI anything..."
+      required
+    >
+    <button id="sendButton">Send</button>
+  </form>
+</main>
+
+<script>
+const form = document.getElementById("chatForm");
+const input = document.getElementById("messageInput");
+const messages = document.getElementById("messages");
+const button = document.getElementById("sendButton");
+
+function addMessage(text, type) {
+  const div = document.createElement("div");
+  div.className = "message " + type;
+  div.textContent = text;
+  messages.appendChild(div);
+  div.scrollIntoView({ behavior: "smooth" });
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const message = input.value.trim();
+  if (!message) return;
+
+  addMessage(message, "user");
+  input.value = "";
+  button.disabled = true;
+  button.textContent = "...";
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Request failed");
+    }
+
+    addMessage(data.answer, "ai");
+
+  } catch (error) {
+    addMessage(
+      "Sorry, something went wrong. Please try again.",
+      "ai"
+    );
+  } finally {
+    button.disabled = false;
+    button.textContent = "Send";
+  }
+});
+</script>
+
+</body>
+</html>
