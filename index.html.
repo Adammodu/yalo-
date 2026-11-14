@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#087a43">
+  <title>NIAMEY MEGA | Airtime Recharge</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6faf7;
+      color: #183329;
+    }
+
+    header {
+      background: #fff;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e5eee8;
+    }
+
+    .logo {
+      color: #087a43;
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .logo span { color: #183329; }
+
+    nav a {
+      text-decoration: none;
+      color: #355447;
+      margin-left: 22px;
+      font-size: 14px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #087a43, #075b35);
+      color: white;
+      text-align: center;
+      padding: 75px 20px 110px;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 48px);
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: #e0f5e8;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .recharge {
+      width: min(92%, 510px);
+      margin: -65px auto 55px;
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 12px 40px #143d2717;
+      position: relative;
+    }
+
+    .recharge h2 {
+      margin-bottom: 23px;
+      font-size: 23px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin: 17px 0 9px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #dce8df;
+      border-radius: 9px;
+      font-size: 15px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus, select:focus {
+      border-color: #087a43;
+    }
+
+    .amounts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .amounts button {
+      padding: 13px 5px;
+      background: #f2f8f4;
+      color: #087a43;
+      border: 1px solid #dcebe1;
+      border-radius: 9px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .amounts button.active {
+      background: #087a43;
+      color: white;
+    }
+
+    .continue {
+      width: 100%;
+      background: #087a43;
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 9px;
+      margin-top: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .continue:hover { background: #066536; }
+
+    #message {
+      margin-top: 15px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .features {
+      padding: 35px 7% 65px;
+      text-align: center;
+    }
+
+    .features h2 { margin-bottom: 30px; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      background: white;
+      padding: 25px 15px;
+      border-radius: 13px;
+      border: 1px solid #e5eee8;
+    }
+
+    .feature h3 {
+      color: #087a43;
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      font-size: 14px;
+      color: #718078;
+      line-height: 1.6;
+    }
+
+    footer {
+      background: #073c27;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 13px;
+    }
+
+    @media(max-width: 600px) {
+      header { padding: 16px 5%; }
+      nav a { margin-left: 10px; font-size: 12px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .recharge { padding: 22px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">NIAMEY <span>MEGA</span></div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#recharge">Recharge</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h1>Recharge Made Simple.</h1>
+  <p>
+    Buy airtime for your favourite network in Niger Republic.
+    Fast, simple and convenient.
+  </p>
+</section>
+
+<section class="recharge" id="recharge">
+  <h2>Buy Airtime</h2>
+
+  <form id="rechargeForm">
+
+    <label for="network">Select Network</label>
+    <select id="network" required>
+      <option value="">Choose your network</option>
+      <option value="Airtel">Airtel Niger</option>
+      <option value="Moov">Moov Africa Niger</option>
+      <option value="Zamani">Zamani Telecom</option>
+    </select>
+
+    <label for="phone">Phone Number</label>
+    <input
+      type="tel"
+      id="phone"
+      placeholder="Enter Niger phone number"
+      required
+    >
+
+    <label>Select Amount (CFA)</label>
+    <div class="amounts">
+      <button type="button" data-amount="500">500</button>
+      <button type="button" data-amount="1000">1,000</button>
+      <button type="button" data-amount="2000">2,000</button>
+      <button type="button" data-amount="3000">3,000</button>
+      <button type="button" data-amount="5000">5,000</button>
+      <button type="button" data-amount="10000">10,000</button>
+    </div>
+
+    <input type="hidden" id="amount" required>
+
+    <button type="submit" class="continue">
+      Continue
+    </button>
+
+    <p id="message"></p>
+  </form>
+</section>
+
+<section class="features" id="about">
+  <h2>Why NIAMEY MEGA?</h2>
+
+  <div class="feature-grid">
+    <div class="feature">
+      <h3>Easy Recharge</h3>
+      <p>Simple airtime purchase experience.</p>
+    </div>
+
+    <div class="feature">
+      <h3>Multiple Networks</h3>
+      <p>Choose your preferred network.</p>
+    </div>
+
+    <div class="feature">
+      <h3>Convenient</h3>
+      <p>Recharge from wherever you are.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 NIAMEY MEGA. All rights reserved.</p>
+  <p style="margin-top:8px">Connecting Niger, one recharge at a time.</p>
+</footer>
+
+<script>
+  const amountButtons = document.querySelectorAll("[data-amount]");
+  const amountInput = document.getElementById("amount");
+
+  amountButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      amountButtons.forEach(b => b.classList.remove("active"));
+      button.classList.add("active");
+      amountInput.value = button.dataset.amount;
+    });
+  });
+
+  document.getElementById("rechargeForm")
+    .addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const network = document.getElementById("network").value;
+      const phone = document.getElementById("phone").value.trim();
+      const amount = amountInput.value;
+      const message = document.getElementById("message");
+
+      if (!network || !phone || !amount) {
+        message.style.color = "#c0392b";
+        message.textContent =
+          "Please select a network, enter your number and amount.";
+        return;
+      }
+
+      message.style.color = "#087a43";
+      message.textContent =
+        "Your selection is ready. Payment and recharge services are not connected yet.";
+    });
+</script>
+
+</body>
+</html>
